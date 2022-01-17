@@ -1,5 +1,6 @@
 import 'package:aytam/components/rounded_button.dart';
 import 'package:aytam/constants.dart';
+import 'package:aytam/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
@@ -33,7 +34,7 @@ class _LoginState extends State<Login> {
               children: [
                 buildLoginHeader(),
                 const SizedBox(height: 150.0),
-                buildPhoneTextField(),
+                buildEmailTextField(),
                 const SizedBox(height: 40.0),
                 buildPasswordTextField(),
                 const SizedBox(height: 100.0),
@@ -62,18 +63,20 @@ class _LoginState extends State<Login> {
     );
   }
 
-  Widget buildPhoneTextField() {
+  Widget buildEmailTextField(){
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Directionality(
         textDirection: TextDirection.rtl,
         child: TextFormField(
           onSaved: (value) => _email = value!.trim(),
-          validator: (value) => value!.isEmpty ? 'يجب ادخال الايميل' : null,
+          validator: (value) => value!.isEmpty ? 'يجب ادخال الإيميل' : null,
           textAlign: TextAlign.right,
-          keyboardType: TextInputType.number,
+          obscureText: true,
+          keyboardType: TextInputType.emailAddress,
           decoration: const InputDecoration(
-            prefixIcon: Icon(Icons.phone)
+              hintText: 'الايميل',
+              prefixIcon: Icon(Icons.email)
           ),
           style: const TextStyle(
               height: 1.0,
@@ -96,6 +99,7 @@ class _LoginState extends State<Login> {
           obscureText: true,
           keyboardType: TextInputType.text,
           decoration: const InputDecoration(
+              hintText: 'الباسوورد',
               prefixIcon: Icon(Icons.lock)
           ),
           style: const TextStyle(
@@ -116,6 +120,7 @@ class _LoginState extends State<Login> {
         size: 0,
         onPressed: (){
             //login
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const Home()));
         },
       ),
     );
